@@ -3,6 +3,11 @@
 // Se realizara una consulta que borre el alumno cuyo id se correponda con el $_GET['id'] 
 
 include 'funciones.php';
+csrf();
+
+if(isset($_POST['submit']) && !hash_equals($_SESSION['csrf'],$_POST['csrf'])) {
+    die();
+}
 $config = include 'config.php';
 
 $resultado = [

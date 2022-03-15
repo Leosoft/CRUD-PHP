@@ -5,6 +5,11 @@
 // Luego me conecto a la bd para buscar el alumno que estamos editando
 
 include 'funciones.php';
+csrf();
+
+if(isset($_POST['submit']) && !hash_equals($_SESSION['csrf'],$_POST['csrf'])) {
+    die();
+}
 $config = include 'config.php';
 
 
@@ -133,6 +138,7 @@ if(isset($alumno) && $alumno) {
             <h2 class="mt-4">Editando el alumno <?= escapar($alumno['nombre']). ' ' . escapar($alumno['apellido']) ?> </h2>
             <hr>
             <form method="post">
+            <input type="csrf" type="hidden" value="<?php echo escapar($_SESSION['csrf']);?>">
                 <div class="form-group">
                     <label for="nombre">Nombre</label>
                     <input type="text" name="nombre" id="nombre" value="<?= escapar($alumno['nombre']) ?>" class="form-control">

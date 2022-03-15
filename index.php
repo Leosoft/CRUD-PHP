@@ -9,6 +9,11 @@
 //incluimos las funciones 
 // Primero debemos obtener la lista de alumnos desde la base de datos
 include 'funciones.php';
+csrf();
+
+if(isset($_POST['submit']) && !hash_equals($_SESSION['csrf'],$_POST['csrf'])) {
+    die();
+}
 
 
 $error = false;
@@ -74,6 +79,7 @@ if($error) {
             <hr>
             <!-- Busqueda de alumnos --> 
             <form method="post" class="form-inline">
+                <input type="csrf" type="hidden" value="<?php echo escapar($_SESSION['csrf']);?>">
                 <div class="form-group mr-3">
                     <input type="text" id="apellido" name="apellido" placeholder="Buscar por apellido">
                 </div>
