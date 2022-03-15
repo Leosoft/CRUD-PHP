@@ -8,7 +8,7 @@
 
         $resultado = [
             'error' => false,
-            'mensaje' => 'El alumno' .escapar($_POST['nombre']) . 'Usuario agregado con exito'
+            'mensaje' => 'El alumno ' .escapar($_POST['nombre']) . ' se ha agregado con exito'
         ];
 
         $config = include 'config.php';
